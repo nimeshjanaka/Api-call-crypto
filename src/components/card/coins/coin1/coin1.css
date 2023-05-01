@@ -1,0 +1,23 @@
+.card{
+    background-color: #5c1a208f;
+    color: antiquewhite;
+    font: bold;
+    
+}
+
+.coin-data-test {
+    height: 400px;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.input-card .ant-card-body {
+    width: 100px;
+    text-align: center;
+    background-color: #1c4e6e;
+}
+
+.main-input-card .ant-card-body {
+    justify-content: space-between;
+    /* background-color: #1e4560; */
+}
