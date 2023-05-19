@@ -16,6 +16,7 @@ const Card1 = () => {
       </div>
       </div>
     </div>
+    <div>
     <div className='grid grid-cols-3 gap-2 mb-8'>
       <div className='text-center bg-primary rounded-x1 py-2'>
         <span className='text-white odos-subtitle-3'>
@@ -40,6 +41,9 @@ const Card1 = () => {
         </span>
       </div>
     </div>
+
+    </div>
+    
    
     </>
   )

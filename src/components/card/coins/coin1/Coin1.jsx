@@ -9,12 +9,21 @@ const gridStyle = {
   textAlign: "center",
 };
 
-let chainData = [];
 let chainNames = [];
 
 const Coin1 = () => {
   const [coinData, setCoinData] = useState();
   const [pathData, setPathData] = useState([]);
+  const [chainData, setChainData] = useState([])
+  const [selectedChains, setSelectedChains] = useState([])
+  const [isButtonArbitrumClicked , setIsButtonArbitrumClicked] = useState(false);
+  const [isButtonPolygonClicked , setButtonPolygonClicked] = useState(false);
+  const [isButtonBscClicked , setIsButtonBscClicked] = useState(false);
+  const [isButtonAvalancheClicked , setIsButtonAvalancheClicked] = useState(false);
+  const [isButtonGnosisClicked , setIsButtonGnosisClicked] = useState(false);
+  const [isButtonEthereumClicked , setIsButtonEthereumClicked] = useState(false);
+  const [isButtonFantomClicked , setIsButtonFantomClicked] = useState(false);
+  const [isButtonOptimismClicked , setIsButtonOptimismClicked] = useState(false);
 
   useEffect(() => {
     axios
@@ -28,11 +37,56 @@ const Coin1 = () => {
         console.log(error);
       });
   }, []);
+  
 
   const handleChainNamesList = (chainName) => {
     console.log(chainName);
+
+    if (chainName === "ethereum"){
+      setIsButtonEthereumClicked(!isButtonEthereumClicked);
+    }
+
+    if (chainName === "polygon"){
+      setButtonPolygonClicked(!isButtonPolygonClicked);
+    }
+
+    if (chainName === "bsc"){
+      setIsButtonBscClicked(!isButtonBscClicked);
+    }
+
+    if (chainName === "avalanche"){
+      setIsButtonAvalancheClicked(!isButtonAvalancheClicked);
+      console.log("avalanche clicked");
+    }
+
+    if (chainName === "gnosis"){
+      setIsButtonGnosisClicked(!isButtonGnosisClicked);
+    }
+
+    if (chainName === "fantom"){
+      setIsButtonFantomClicked(!isButtonFantomClicked);
+    }
+
+    if (chainName === "optimism"){
+      setIsButtonOptimismClicked(!isButtonOptimismClicked);
+    }
+
+    if (chainName === "arbitrum"){
+      setIsButtonArbitrumClicked(!isButtonArbitrumClicked);
+    }
+
+
+
+
+    console.log("clicked " , chainName);
+    
+
+
     const isIncludesChain = chainNames.includes(chainName);
 
+    if(selectedChains.includes(chainName)){
+
+    }else{}
     if(!isIncludesChain) {
       chainNames.push(chainName)
     } else {
@@ -43,29 +97,54 @@ const Coin1 = () => {
     }
 
     console.log(chainNames)
+    filterChains()
   };
 
-  useEffect(() => {
-    chainData = [];
+  const filterChains = () => {
+    console.log('running...')
+    setChainData([])
     pathData.forEach((element) => {
       const isAllEthChain = element?.path?.every(
         (obj) => chainNames.includes(obj.chain)
       );
 
       if (isAllEthChain) {
-        chainData.push(element);
+        setChainData(oldArray => [...oldArray, element])
       }
       console.log(isAllEthChain)
     });
+  }
 
-    console.log(chainData);
-  }, [pathData, chainNames]);
+  useEffect(() => {
+    console.log(chainData)
+  }, [chainData])
+
+
+  // const RefreshComponent = () => {
+  //   const [shouldRefresh, setShouldRefresh] = useState(false);
+  
+  //   useEffect(() => {
+  //     const intervalId = setInterval(() => {
+  //       setShouldRefresh(true);
+  //     }, 3000);
+  
+  //     return () => clearInterval(intervalId);
+  // }, []);
+
+  // useEffect(() => {
+  //   if (shouldRefresh) {
+  //     // Make any API calls or update the state that should trigger the refresh
+  //     setShouldRefresh(false);
+  //   }
+  // }, [shouldRefresh]);
+
 
   return (
-    <Card className="card">
-      <Card.Grid
+    <Card className="card mainCardGrid" >
+      <Card.Grid 
         onClick={() => handleChainNamesList("ethereum")}
         style={gridStyle}
+        className={isButtonEthereumClicked && `buttonActive` }
       >
         <img
           src="https://www.odos.xyz/assets/chains/ethereum.png"
@@ -75,8 +154,9 @@ const Coin1 = () => {
         <div>
           <p>{coinData?.ethereum_block}</p>
         </div>
-      </Card.Grid>
-      <Card.Grid onClick={() => handleChainNamesList("polygon")} style={gridStyle}>
+      </Card.Grid >
+      <Card.Grid onClick={() => handleChainNamesList("polygon")} style={gridStyle}
+       className={isButtonPolygonClicked && `buttonActive` } >
         <img
           src="https://www.odos.xyz/assets/chains/polygon.png"
           alt="coin1"
@@ -86,7 +166,8 @@ const Coin1 = () => {
           <p>{coinData?.polygon_block}</p>
         </div>
       </Card.Grid>
-      <Card.Grid onClick={() => handleChainNamesList("bsc")} style={gridStyle}>
+      <Card.Grid onClick={() => handleChainNamesList("bsc")} style={gridStyle}
+      className={isButtonBscClicked && `buttonActive` } >
         <img
           src="https://www.odos.xyz/assets/chains/bsc.png"
           alt="coin1"
@@ -96,7 +177,8 @@ const Coin1 = () => {
           <p>{coinData?.bsc_block}</p>
         </div>
       </Card.Grid>
-      <Card.Grid onClick={() => handleChainNamesList("avalanche")} style={gridStyle}>
+      <Card.Grid onClick={() => handleChainNamesList("avalanche")} style={gridStyle}
+        className={isButtonAvalancheClicked && `buttonActive` } >
         <img
           src="https://www.odos.xyz/assets/chains/avalanche.png"
           alt="coin1"
@@ -106,7 +188,8 @@ const Coin1 = () => {
           <p>{coinData?.avalanche_block}</p>
         </div>
       </Card.Grid>
-      <Card.Grid onClick={() => handleChainNamesList("arbitrum")} style={gridStyle}>
+      <Card.Grid onClick={() => handleChainNamesList("arbitrum")} style={gridStyle}
+      className={isButtonArbitrumClicked && `buttonActive` }>
         <img
           src="https://www.odos.xyz/assets/chains/arbitrum.svg"
           alt="coin1"
@@ -116,7 +199,8 @@ const Coin1 = () => {
           <p>{coinData?.arbitrum_block}</p>
         </div>
       </Card.Grid>
-      <Card.Grid onClick={() => handleChainNamesList("fantom")} style={gridStyle}>
+      <Card.Grid onClick={() => handleChainNamesList("fantom")} style={gridStyle}
+      className={isButtonFantomClicked && `buttonActive` }>
         <img
           src="https://www.odos.xyz/assets/chains/fantom.png"
           alt="coin1"
@@ -126,7 +210,8 @@ const Coin1 = () => {
           <p>{coinData?.fantom_block}</p>
         </div>
       </Card.Grid>
-      <Card.Grid onClick={() => handleChainNamesList("gnosis")} style={gridStyle}>
+      <Card.Grid onClick={() => handleChainNamesList("gnosis")} style={gridStyle}
+      className={isButtonGnosisClicked && `buttonActive` }>
         <img
           src="https://www.odos.xyz/assets/chains/gnosis.png"
           alt="coin1"
@@ -136,7 +221,8 @@ const Coin1 = () => {
           <p>{coinData?.gnosis_block}</p>
         </div>
       </Card.Grid>
-      <Card.Grid onClick={() => handleChainNamesList("optimism")} style={gridStyle}>
+      <Card.Grid onClick={() => handleChainNamesList("optimism")} style={gridStyle}
+      className={isButtonOptimismClicked && `buttonActive` }>
         <img
           src="https://www.odos.xyz/assets/chains/optimism.png"
           alt="coin1"
@@ -146,7 +232,11 @@ const Coin1 = () => {
           <p>{coinData?.optimism_block}</p>
         </div>
       </Card.Grid>
-
+      
+      <div className='b'>
+      <button>Real Time</button>
+      <button>Leadboard</button>  
+    </div>
       <div className="coin-data-test">
         {chainData.map((data) => (
           <>
@@ -166,6 +256,8 @@ const Coin1 = () => {
         ))}
       </div>
     </Card>
+
+    
   );
 };
 

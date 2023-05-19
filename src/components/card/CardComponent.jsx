@@ -1,7 +1,7 @@
 import { Card, Col, Row } from 'antd';
 import React from 'react';
 import './cardcomponent.css';
-import Card2 from './Card2';
+
 import Coin1 from './coins/coin1/Coin1';
 import Card1 from './Card1';
 
@@ -13,7 +13,7 @@ const CardComponent = () => (
       <Card className='card1'> 
         <h3>Select blockchains you would like to see</h3>
        <Coin1 />
-        <Card2 />
+       
       </Card>
       
     </Col>

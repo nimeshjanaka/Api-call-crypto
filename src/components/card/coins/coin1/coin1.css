@@ -1,23 +1,59 @@
 .card{
-    background-color: #5c1a208f;
+    background-color: #031521;
     color: antiquewhite;
     font: bold;
     
 }
 
 .coin-data-test {
-    height: 400px;
+    height: 350px;
     width: 100%;
     overflow-y: scroll;
+    background-color: #031521;
 }
 
 .input-card .ant-card-body {
-    width: 100px;
+    width: 70px;
     text-align: center;
-    background-color: #1c4e6e;
+    background-color: #031521;
+    height: 120px;
+    
+
 }
 
 .main-input-card .ant-card-body {
     justify-content: space-between;
-    /* background-color: #1e4560; */
+     background-color: #031521;
+ 
+}
+
+.actClass{
+    background-color: #1e4560;
+    outline-color: ff5100;
+    outline-width: 1px;
+    outline-style: solid;
+
+}
+
+.name-list-not-selected{
+    background-color: #031521 !important;
+    border-radius: 30px !important;
+    outline-style: none;
+}
+
+.name-list-selected{
+    background-color: #031521 !important;
+}
+
+.buttonActive {
+    background-color: #1e4560;
+}
+
+.mainCardGrid .ant-card-grid.ant-card-grid-hoverable{
+    padding: 10px !important;
+
+}
+
+.mainCardGrid .ant-card-grid.ant-card-grid-hoverable p {
+    margin: 3px 0px !important;
 }
