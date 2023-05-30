@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Card } from "antd";
+import { Button, Card, Progress } from "antd";
 import axios from "axios";
 import { useEffect } from "react";
 import "./coin1.css";
@@ -27,6 +27,32 @@ const Coin1 = () => {
   const [isButtonFantomClicked, setIsButtonFantomClicked] = useState(false);
   const [isButtonOptimismClicked, setIsButtonOptimismClicked] = useState(false);
 
+  const [percentage, setPercentage] = useState(0);
+
+  useEffect(() => {
+    let currentPercentage = 0;
+    let intervalId;
+
+    const updatePercentage = () => {
+      if (currentPercentage >= 100) {
+        clearInterval(intervalId);
+        setTimeout(() => {
+          currentPercentage = 0;
+          intervalId = setInterval(updatePercentage, 100);
+        }, 3000);
+      } else {
+        setPercentage(currentPercentage);
+        currentPercentage += 1;
+      }
+    };
+
+    intervalId = setInterval(updatePercentage, 100);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
+
   useEffect(() => {
     const interval = setInterval(() => {
       // Call your function here
@@ -38,7 +64,7 @@ const Coin1 = () => {
   }, []);
 
   const fetchLatestData = async () => {
-    console.log('calling....')
+    console.log("calling....");
     axios
       .get("https://www.odos.xyz/api/latest-arbs") // Send the request to the proxy server
       .then((response) => {
@@ -128,8 +154,8 @@ const Coin1 = () => {
   }, [chainData]);
 
   useEffect(() => {
-    filterChains()
-  }, [coinData])
+    filterChains();
+  }, [coinData]);
 
   // const RefreshComponent = () => {
   //   const [shouldRefresh, setShouldRefresh] = useState(false);
@@ -279,6 +305,19 @@ const Coin1 = () => {
           </div>
         </div>
       </div>
+
+      <div className="w-100">
+        <Progress
+          percent={percentage}
+          showInfo={false}
+          size="small"
+          strokeColor={{
+            "0%": "#fa541c",
+            "100%": "#fa541c",
+          }}
+        />
+      </div>
+
       <Row style={{ height: "500px", overflow: "auto" }}>
         {chainData.map((data) => (
           <Card
