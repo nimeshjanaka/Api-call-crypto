@@ -9,7 +9,7 @@ import Card1 from './Card1';
 
 const CardComponent = () => (
   <Row gutter={16}>
-    <Col span={10}>
+    <Col span={8}>
       <Card className='card1'> 
         <h3>Select blockchains you would like to see</h3>
        <Coin1 />
@@ -17,7 +17,7 @@ const CardComponent = () => (
       </Card>
       
     </Col>
-    <Col span={14}>
+    <Col span={16}>
       <Card className='card2'>
       <Card1 />
       </Card>

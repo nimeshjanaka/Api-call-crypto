@@ -75,13 +75,12 @@ const MainLayout= () => {
           
           <Content
             style={{
-              padding: '0 20px',
+              padding: '20px 20px',
               minHeight: '100vh',
               backgroundColor: '#051c2c',
               color: 'black', 
             }}
           >
-            Content
             <CardComponent />
            {/* <Card /> */}
 
